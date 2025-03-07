@@ -18,3 +18,43 @@
 作成者
   JellyFish41(HSPプログラミングコンテスト　アカウント名)
 
+
+
+画像・3D等について
+gitのファイル制限(100MB)を超えるためGoogleドライブに保存してあります。
+
+ファイル階層図
+JF_Game
+|- play.exe
+|- start.ax
+|- log.txt
+|     ・
+|     ・
+|     ・
+|-res
+   |- 3dmodule.hsp
+   |- white.png
+   |- area1.gpb
+   |-     ・
+   |-     ・
+   |-     ・
+   |-shade
+       |- colored.flag
+       |- texured_gray.flag
+       |- font.vert
+       |-     ・
+       |-     ・
+       |-     ・
+
+図のようにresフォルダを配置してください。
+
+
+
+Googleドライブ　resフォルダは以下のリンクから
+https://drive.google.com/drive/folders/10luT9Qqu3k4itIizQ14dtjmcIHbK8Zcz?usp=sharing
+
+
+
+ゲーム起動
+resファイルが正しく配置されていれば、
+play.exeより起動できます
