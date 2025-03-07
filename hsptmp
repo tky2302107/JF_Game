@@ -1,0 +1,2127 @@
+#packopt NAME "Play"
+// Agency FB Bold Condensed & Meiryo
+
+
+
+*start
+	#include "hgimg4.as"
+	#include "hsp3util.as"
+	#include "hspmath.as"
+	title "HGIMG4 Test"
+	await 10
+	
+
+	selectlv = 0
+	screen 0,1920,1080,0,0,0
+	gpreset
+	setcls CLSMODE_SOLID, 0		; 画面クリア設定
+	setpos GPOBJ_CAMERA0, 0,35,100	; カメラ位置を設定
+	gpload id_title, "res/title"		; インポート
+	setpos id_title,0,35,0 ;初期ポジション
+	setangr id_title ,0, 0,0 ;初期回転合い
+	setscale id_title, 27,27,27
+	repeat
+		// screen 0,1280,720
+		redraw 0			; 描画開始
+			await 1000/60 : gpdraw	
+		redraw 1
+		getkey enter, 13
+			
+			if enter = 1 :mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:goto *rule:stop
+		getkey esc, 27
+			mmplay 2
+			if esc = 1 :mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:end:stop
+		esc = 0
+		enter = 0
+	loop
+	stop
+
+*rule
+	screen 0,1920,1080,0,0,0
+	gpreset
+	setcls CLSMODE_SOLID, 0		; 画面クリア設定
+	setpos GPOBJ_CAMERA0, 0,35,100	; カメラ位置を設定
+	gpload id_rule, "res/rule"		; インポート
+	setpos id_rule ,0,35,0 ;初期ポジション
+	setangr id_rule ,0, 0,0 ;初期回転合い
+	setscale id_rule, 27,27,27
+	repeat
+		// screen 0,1280,720
+		redraw 0			; 描画開始
+			await 1000/60 : gpdraw	
+		redraw 1
+		//enter
+		getkey enter, 13
+			if enter = 1 :mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:goto *rule2:stop
+		getkey esc, 27
+			if esc = 1 :mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:goto *start:stop
+		esc = 0
+		enter = 0
+	loop
+	stop
+*rule2//キューブゾーンは、バグが起きる
+	screen 0,1920,1080,0,0,0
+	gpreset
+	setcls CLSMODE_SOLID, 0		; 画面クリア設定
+	setpos GPOBJ_CAMERA0, 0,35,100	; カメラ位置を設定
+	gpload id_rule2, "res/rule2"		; インポート
+	setpos id_rule2,0,35,0 ;初期ポジション
+	setangr id_rule2 ,0, 0,0 ;初期回転合い
+	setscale id_rule2, 27,27,27
+	repeat
+		// screen 0,1280,720
+		redraw 0			; 描画開始
+			await 1000/60 : gpdraw	
+		redraw 1
+		//enter
+		getkey enter, 13
+			if enter = 1 :mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:goto *explain:stop
+		getkey esc, 27
+			if esc = 1 :mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:goto *rule:stop
+		esc = 0
+		enter = 0
+	loop
+	stop
+
+*explain
+	screen 0,1920,1080,0,0,0
+	gpreset
+	setcls CLSMODE_SOLID, 0		; 画面クリア設定
+	setpos GPOBJ_CAMERA0, 0,35,100	; カメラ位置を設定
+	gpload id_explain, "res/explain"		; インポート
+	setpos id_explain,0,35,0 ;初期ポジション
+	setangr id_explain ,0, 0,0 ;初期回転合い
+	setscale id_explain, 27,27,27
+	repeat
+		// screen 0,1280,720
+		redraw 0			; 描画開始
+			await 1000/60 : gpdraw	
+		redraw 1
+		//enter
+		getkey enter, 13
+			// if enter = 1 :goto *count3:stop
+			if enter = 1 :mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:goto *select:stop
+		getkey esc, 27
+		if esc = 1 :mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:goto *rule2:stop
+		esc = 0
+		enter = 0
+	loop
+	stop
+*select
+		screen 0,1920,1080,0,0,0
+		gpreset
+		setcls CLSMODE_SOLID, 0		; 画面クリア設定
+		setpos GPOBJ_CAMERA0, 0,35,100	; カメラ位置を設定
+		gpload id_explain, "res/select"		; インポート
+		setpos id_explain,0,35,0 ;初期ポジション
+		setangr id_explain ,0, 0,0 ;初期回転合い
+		setscale id_explain, 27,27,27
+		repeat
+			// screen 0,1280,720
+			redraw 0			; 描画開始
+				await 1000/60 : gpdraw	
+			redraw 1
+			//enter
+			getkey one, 49
+				selectlv = 0
+				if one = 1 :mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:goto *count3:stop
+			getkey two, 50
+				selectlv = 1
+				if two = 1 :mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:goto *count3:stop
+			getkey three, 51
+				selectlv = 2
+				if three = 1 :mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:goto *count3:stop
+			getkey four, 52
+				selectlv = 3
+				if four = 1 :mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:goto *count3:stop
+			getkey esc, 27
+			if esc = 1 :mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:goto *explain:stop
+			esc = 0
+			one = 0
+			two = 0
+			three = 0
+			four = 0
+		loop
+		stop
+	
+*count3
+	screen 0,1920,1080,0,0,0
+	gpreset
+	setcls CLSMODE_SOLID, 0		; 画面クリア設定
+	setpos GPOBJ_CAMERA0, 0,35,100	; カメラ位置を設定
+	if selectlv = 0 or selectlv = 1 :gpload id_count3, "res/cnt3"		; インポート
+	if selectlv = 2 or selectlv = 3 :gpload id_count3, "res/cnt32"		; インポート
+	setpos id_count3,0,35,0 ;初期ポジション
+	setangr id_count3 ,0, 0,0 ;初期回転合い
+	setscale id_count3, 27,27,27
+	repeat
+		// screen 0,1280,720
+		redraw 0			; 描画開始
+			gpdraw	
+		redraw 1
+		await 1500
+		mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:
+		goto *count2
+		stop
+	loop
+	stop
+*count2
+	screen 0,1920,1080,0,0,0
+	gpreset
+	setcls CLSMODE_SOLID, 0		; 画面クリア設定
+	setpos GPOBJ_CAMERA0, 0,35,100	; カメラ位置を設定
+	if selectlv = 0 or selectlv = 1 :gpload id_count2, "res/cnt2"		; インポート
+	if selectlv = 2 or selectlv = 3 :gpload id_count2, "res/cnt22"		; インポート
+	setpos id_count2,0,35,0 ;初期ポジション
+	setangr id_count2 ,0, 0,0 ;初期回転合い
+	setscale id_count2, 27,27,27
+	repeat
+		// screen 0,1280,720
+		redraw 0			; 描画開始
+			gpdraw	
+		redraw 1
+		await 1500
+		mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:
+		goto *count1
+		stop
+	loop
+	stop
+*count1
+	mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:
+	screen 0,1920,1080,0,0,0
+	gpreset
+	setcls CLSMODE_SOLID, 0		; 画面クリア設定
+	setpos GPOBJ_CAMERA0, 0,35,100	; カメラ位置を設定
+	if selectlv = 0 or selectlv = 1 :gpload id_count1, "res/cnt1"		; インポート
+	if selectlv = 2 or selectlv = 3 :gpload id_count1, "res/cnt12"		; インポート
+	setpos id_count1,0,35,0 ;初期ポジション
+	setangr id_count1 ,0, 0,0 ;初期回転合い
+	setscale id_count1, 27,27,27
+	repeat
+		// screen 0,1280,720
+		redraw 0			; 描画開始
+			gpdraw	
+		redraw 1
+		await 100
+		
+		if selectlv = 0 :goto *main
+		if selectlv = 1 :goto *main2
+		if selectlv = 2 :goto *main3
+		if selectlv = 3 :goto *main4
+		stop
+	loop
+	stop
+
+*fail
+	screen 0,1920,1080,0,0,0
+	gpreset
+	setcls CLSMODE_SOLID, 0		; 画面クリア設定
+	setpos GPOBJ_CAMERA0, 0,35,100	; カメラ位置を設定
+	gpload id_fail, "res/result1"		; インポート
+	setpos id_fail,0,35,0 ;初期ポジション
+	setangr id_fail ,0, 0,0 ;初期回転合い
+	setscale id_fail, 27,27,27
+	mmload "res/bomb2.mp3",16,2
+	mmplay 16
+	repeat
+		// screen 0,1280,720
+		redraw 0			; 描画開始
+			await 1000/60 : gpdraw	
+		redraw 1
+		//enter
+		getkey enter, 13
+			if enter = 1 :mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:goto *count3:stop
+		getkey esc, 27
+			if esc = 1 :mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:goto *start:stop
+		esc = 0
+		enter = 0
+	loop
+	stop
+
+*fail_world
+	screen 0,1920,1080,0,0,0
+	gpreset
+	setcls CLSMODE_SOLID, 0		; 画面クリア設定
+	setpos GPOBJ_CAMERA0, 0,35,100	; カメラ位置を設定
+	gpload id_fail2, "res/result2"		; インポート
+	setpos id_fail2,0,35,0 ;初期ポジション
+	setangr id_fail2 ,0, 0,0 ;初期回転合い
+	setscale id_fail2, 27,27,27
+	mmload "res/bomb2.mp3",16,2
+	mmplay 16
+	repeat
+		// screen 0,1280,720
+		redraw 0			; 描画開始
+		await 1000/60
+		gpdraw	
+		redraw 1
+		//enter
+		getkey enter, 13
+			if enter = 1 :mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:goto *count3:stop
+		getkey esc, 27
+			if esc = 1 :mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:goto *start:stop
+		esc = 0
+		enter = 0
+	loop
+	stop
+
+*success
+	screen 0,1920,1080,0,0,0
+	gpreset
+	setcls CLSMODE_SOLID, 0		; 画面クリア設定
+	setpos GPOBJ_CAMERA0, 0,35,100	; カメラ位置を設定
+	gpload id_result3, "res/result3"	; インポート
+	setpos id_result3,0,35,0 ;初期ポジション
+	setangr id_result3 ,0, 0,0 ;初期回転合い
+	setscale id_result3, 27,27,27
+	// await 2000
+	repeat
+		// screen 0,1280,720
+		redraw 0			; 描画開始
+		await 1000/60
+		gpdraw	
+		redraw 1  
+		//enter
+		getkey enter, 13		
+			if enter = 1 :mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:goto *start:stop
+		getkey esc, 27
+			if esc = 1 :mmload "res/click.mp3",2,0:mmvol 2,0 :mmplay 2:end
+		stop
+		esc = 0
+		enter = 0
+	loop
+	stop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*main
+	mmload "res/drum1.mp3",32,0
+	mmvol 32,0 
+	mmplay 32
+// *main
+	if selectlv = 1 :stop
+	gpreset
+	setcls CLSMODE_SOLID, 0		; 画面クリア設定
+	setpos GPOBJ_CAMERA0, 0,35,100	; カメラ位置を設定
+	
+	gpload id_model, "res/jelly_hsp_flight_color2"		; インポート
+	// gpload id_model, "res/cube"
+	setpos id_model,0,30,0 ;初期ポジション
+	setangr id_model ,0, 64,-50 ;初期回転合い
+	setcoli id_model,1,2
+
+	gpload id_go, "res/cnt0"		; インポート
+	setpos id_go,0,30,-100 ;初期ポジション
+	setangr id_go ,0, 0,0 ;初期回転合い
+	setcoli id_go,1,2
+	setscale id_go, 27,27,27
+
+	gpload id_build,"res/area2"
+	setpos id_build,50,-200,-1000
+	setscale id_build,20,20,20
+
+	gpload id_beam,"res/beam1"
+	setpos id_beam,1500,1500,0
+	setscale id_beam,10,10,10
+
+	gpclone id_beam1,id_beam:gpclone id_beam2,id_beam:gpclone id_beam3,id_beam:gpclone id_beam4,id_beam:gpclone id_beam5,id_beam:
+	gpclone id_beam6,id_beam:gpclone id_beam7,id_beam:gpclone id_beam8,id_beam:gpclone id_beam9,id_beam:gpclone id_beam10,id_beam:
+	gpclone id_beam11,id_beam:gpclone id_beam12,id_beam:gpclone id_beam13,id_beam:gpclone id_beam14,id_beam:gpclone id_beam15,id_beam:
+	gpclone id_beam16,id_beam:gpclone id_beam17,id_beam:gpclone id_beam18,id_beam:gpclone id_beam19,id_beam:gpclone id_beam20,id_beam:
+	gpclone id_beam21,id_beam:gpclone id_beam22,id_beam:
+	
+	ddim Lposx
+	ddim Lposy
+	ddim Lposz
+
+	Lposx = -1000,-950,-900,-850,-800,750,-700,-650,-600,-550,-500,-450,-400,-350,-300,-250,-200,-150,-100,-50,0,50,100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900,950,1000
+	Lposy = 500,-100,400,-200,300,-300,200,-400,100,-500,500,-100,400,-200,300,-300,200,-400,100,-500,500,-100,400,-200,300,-300,200,-400,100,-500,500,-100,500,-200,500,-300,500,-400,500,-500,500
+
+
+
+	setpos id_beam1,-1000,500,0
+	setpos id_beam2,-900,-500,0
+	setpos id_beam3,-800,500,0
+	setpos id_beam4,-700,-500,0
+	setpos id_beam5,-600,500,0
+	setpos id_beam6,-500,-500,0
+	setpos id_beam7,-400,500,0
+	setpos id_beam8,-300,-500,0
+	setpos id_beam9,-200,500,0
+	setpos id_beam10,-100,-500,0
+	setpos id_beam11,0,500,0
+	setpos id_beam12,100,-500,0
+	setpos id_beam13,200,500,0
+	setpos id_beam14,300,-500,0
+	setpos id_beam15,400,500,0
+	setpos id_beam16,500,-500,0
+	setpos id_beam17,600,500,0
+	setpos id_beam18,700,-500,0
+	setpos id_beam19,800,500,0
+	setpos id_beam20,900,-500,0
+	setpos id_beam21,1000,500,0
+	
+
+	setcls CLSMODE_SOLID, $051e37//$404040		; 背景色
+	
+	model_x = 0 : model_y = 30 : model_z = 0
+	angr_x = 0  : angr_y = 64  : angr_z = -50
+	cam_x = 0   : cam_y = 40   : cam_z = 60
+	x=0         : y=60         : z=0
+	model_rx=0  : model_ry=0   : Energy = 1000
+	loop_x = 0  : loop_y = 0   : loop_z = 0
+	flg = 0     : objjudge = -1 : objjudge2 = -1
+	
+	objx = 0    : objy = 30    : objz = -80
+
+	flg1 = -1   : flg2 = -1    : flg3 = -1
+	flg4 = -1   : flg5 = -1    : flgxx = 0
+
+	pmlistx = 1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1
+	pmlisty = 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	
+	setcoli id_box,   2, 1
+	setcoli id_model, 1,0
+
+repeat
+	
+	// screen 0,1280,720
+	redraw 0			; 描画開始
+
+	gpdraw				; シーンの描画
+
+	color 255,255,255
+	pos 8,8:mes "Dangerous flying in the cube zone with jelly Lv.1"
+	mes "ワールド右限まで:   約 "+str((1000-model_x)/10)+"M"
+	mes "ワールド左限まで:   約 "+str((1000+model_x)/10)+"M"
+	mes "ワールド上限まで:   約 "+str((500-model_y)/10)+"M"
+	mes "ワールド下限まで:   約 "+str((500+model_y)/10)+"M"
+	mes "スタートからの距離: 約 "+str((-1*model_z)/10)+"M"
+	mes "ハイパワーメーター: 約 "+str(Energy-96)
+	
+	if str((1000-model_x)/10) = 0 :goto *fail_world
+	if str((1000+model_x)/10) = 0 :goto *fail_world
+	if str((500-model_y)/10) = 0 :goto *fail_world
+	if str((500+model_y)/10) = 0 :goto *fail_world
+	if model_z/10 <= -4500:goto *success
+
+	redraw 1			; 描画終了
+	await 1000/60			; 待ち時間
+
+	if angr_x != 0{
+		if angr_x <= -1:angr_x+=1
+		if angr_x >= 1:angr_x-=1
+	}
+	if angr_y != 64{
+		if angr_y >= 65:angr_y-=1
+		if angr_y <= 63:angr_y+=1
+	}
+
+	//left
+	key = 0
+	getkey key1, 37 
+	if key1 = 1 and cam_z-model_z<1{
+		if cam_x>model_x{
+			cam_x=cam_x+key1
+			cam_z=cam_z+key1
+			flg = 11
+		}
+		else{
+			cam_x=cam_x+key1
+			cam_z=cam_z-key1
+			flg = 22
+		}
+	}
+	if key1 = 1 and cam_z-model_z>0{
+		if cam_x>model_x{
+			cam_x=cam_x-key1
+			cam_z=cam_z+key1
+			flg = 33
+		}
+		else{
+			cam_x=cam_x-key1
+			cam_z=cam_z-key1
+			flg = 44
+		}
+	}
+    if cam_z-model_z>61:cam_z=model_z+60
+
+	//right
+	key3 = 0
+	getkey key3, 39 
+	if key3 = 1 and cam_z-model_z<1{
+		if cam_x>model_x{
+			cam_x=cam_x-key3
+			cam_z=cam_z-key3
+			flg = 11
+		}
+		else{
+			cam_x=cam_x-key3
+			cam_z=cam_z+key3
+			flg = 22
+		}
+	}
+	if key3 = 1 and cam_z-model_z>0{
+		if cam_x>model_x{
+			cam_x=cam_x+key3
+			cam_z=cam_z-key3
+			flg = 33
+		}
+		else{
+			cam_x=cam_x+key3
+			cam_z=cam_z+key3
+			flg = 44
+		}
+	}
+	
+	
+	//up
+	getkey key2, 38
+	if key2 = 1 : model_y += 1 :cam_y+=1
+	key2 = 0
+
+	
+	//down
+	getkey key4, 40 
+	if key4 = 1 : model_y -= 1 :cam_y-=1
+	key4 = 0
+	//enter
+	getkey key5, 13
+	if key5 = 1 {
+		cam_x=model_x
+		cam_y=model_y
+		cam_z=model_z+60
+		model_rx=-0
+	}
+	key5 = 0
+	//w
+	getkey key6, 87
+	if key6 = 1 : model_x=model_x		//model_z -= 1 :cam_z -=1
+	key6 = 0
+	
+	//a
+	key8 = 0
+	getkey key8, 65
+	if key8 = 1{
+		cam_x -=1
+		model_x-=1
+		model_rx-=1
+		angr_y+=2
+	}
+	key9 = 0
+	//d
+	getkey key9, 68 
+	if key9 = 1 {
+		cam_x +=1
+		model_x+=1 
+		model_rx+=1 
+		angr_y-=2
+	}
+	if angr_y >= 73 : angr_y=72
+	if angr_y <= 55 : angr_y=56
+	//s
+	getkey key7, 83 
+		if key7 = 1 {
+			model_z += 1 
+			cam_z +=1
+			angr_x+=2
+		}
+	key7 = 0
+	
+    //space 
+    getkey key10, 32
+    Accel = 0
+	If Energy <= 5000 : Energy +=2
+    if key10 = 1 {
+		Accel = 1
+		angr_x-=2
+	}
+	if angr_x >= 9 : angr_x=8
+	if angr_x <= -5 : angr_x=-4
+    key10 = 0
+	getkey esc, 27
+		if esc = 1 :goto *start:stop
+	esc = 0
+
+    
+    //Autoスクロール
+	if Accel = 1{
+		if Energy > 100{
+			model_z -= 7
+			cam_z -=7
+			Energy-=7
+		}
+	}
+	if Accel = 0{
+		model_z -= 5 
+		cam_z -=5
+	}
+
+	if Energy <= 0:Energy = 0
+    if Energy<=5000 :Energy+=1
+    if Energy = 3097:Energy=3096
+
+// モデル可動範囲制限
+	if model_y>501 :model_y = 500
+	if model_y<-501 :model_y = -500
+	if model_x>1001 :model_x = 1000 
+	if model_x<-1001 :model_x = -1000 
+	if cam_y>501 :cam_y = 500
+	if cam_y<-501 :cam_y = -500
+	
+	if model_y+60 <cam_y:cam_y = model_y+60
+	if model_y-60 >cam_y:cam_y = model_y-60
+
+	gplookat GPOBJ_CAMERA0,model_x,model_y,model_z
+	setpos GPOBJ_CAMERA0,cam_x,model_y+10,cam_z
+	setpos id_model,model_x,model_y,model_z
+	setangr id_model,angr_x,angr_y,angr_z
+	
+	if angr_y = 320:angr_y = 64
+	if angr_y = 63 :angr_y = 319 
+	
+
+	flg1 = -1 : flg2 = -1 :	flg3 = -1 :	flg4 = -1 :	flg5 = -1
+	
+	repeat 21
+	if Lposx(cnt) >= 1001{
+		pmlistx(cnt) = 0
+		Lposx(cnt) = Lposx(cnt)-3
+	}
+	if Lposx(cnt) <= -1001{
+		pmlistx(cnt) = 1
+		Lposx(cnt) = Lposx(cnt)+3
+	}
+
+	if pmlistx(cnt) = 1{
+		Lposx(cnt) = Lposx(cnt)+1
+	}else{
+		Lposx(cnt) = Lposx(cnt)-1
+	}
+
+	if Lposy(cnt) >= 501{
+		pmlisty(cnt) = 1
+	}
+	if Lposy(cnt) <= -501{
+		pmlisty(cnt) = 0 
+	}
+
+	if pmlisty(cnt) = 1{
+		Lposy(cnt) = Lposy(cnt)-1
+	}else{
+		Lposy(cnt) = Lposy(cnt)+1
+	}
+
+	loop
+
+
+
+	setpos id_beam1,Lposx(0),Lposy(0),0
+	setpos id_beam2,Lposx(1),Lposy(1),0
+	setpos id_beam3,Lposx(2),Lposy(2),0
+	setpos id_beam4,Lposx(3),Lposy(3),0
+	setpos id_beam5,Lposx(4),Lposy(4),0
+	setpos id_beam6,Lposx(5),Lposy(5),0
+	setpos id_beam7,Lposx(6),Lposy(6),0
+	setpos id_beam8,Lposx(7),Lposy(7),0
+	setpos id_beam9,Lposx(8),Lposy(8),0
+	setpos id_beam10,Lposx(9),Lposy(9),0
+	setpos id_beam11,Lposx(10),Lposy(10),0
+	setpos id_beam12,Lposx(11),Lposy(11),0
+	setpos id_beam13,Lposx(12),Lposy(12),0
+	setpos id_beam14,Lposx(13),Lposy(13),0
+	setpos id_beam15,Lposx(14),Lposy(14),0
+	setpos id_beam16,Lposx(15),Lposy(15),0
+	setpos id_beam17,Lposx(16),Lposy(16),0
+	setpos id_beam18,Lposx(17),Lposy(17),0
+	setpos id_beam19,Lposx(18),Lposy(18),0
+	setpos id_beam20,Lposx(19),Lposy(19),0
+	setpos id_beam21,Lposx(20),Lposy(20),0
+
+
+
+	//id_model側接触エリア設定 ビームの用意数分ループする
+	repeat 21
+	if model_x-30<=Lposx(cnt){
+		if Lposx(cnt)<=model_x+30{
+			if model_y-10<=Lposy(cnt){
+				if Lposy(cnt)<=model_y{
+					
+					// setpos id_model,50,50,50
+					// setpos GPOBJ_CAMERA0,model_x,model_y,model_z
+					
+					
+
+					redraw 0
+					redraw 1
+					
+					gpreset
+					await 10
+					goto *fail
+					stop
+				}
+			}
+		}
+	} 
+
+	loop
+
+
+loop
+stop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*main2
+	
+	mmload "res/drum1.mp3",32,0
+	mmvol 32,0 
+	mmplay 32
+	
+// *main
+	// if selectlv = 1 :stop
+	gpreset
+	setcls CLSMODE_SOLID, 0		; 画面クリア設定
+	setpos GPOBJ_CAMERA0, 0,35,100	; カメラ位置を設定
+	
+	gpload id_model, "res/jelly_hsp_flight_color2"		; インポート
+	// gpload id_model, "res/cube"
+	setpos id_model,0,30,0 ;初期ポジション
+	setangr id_model ,0, 64,-50 ;初期回転合い
+	setcoli id_model,1,2
+
+	gpload id_go, "res/cnt0"		; インポート
+	setpos id_go,0,30,-100 ;初期ポジション
+	setangr id_go ,0, 0,0 ;初期回転合い
+	setcoli id_go,1,2
+	setscale id_go, 27,27,27
+
+	gpload id_build,"res/area2"
+	setpos id_build,50,-200,-1000
+	setscale id_build,20,20,20
+
+	gpload id_beam,"res/beam1"
+	setpos id_beam,1500,1500,0
+	setscale id_beam,10,10,10
+
+	gpclone id_beam1,id_beam:gpclone id_beam2,id_beam:gpclone id_beam3,id_beam:gpclone id_beam4,id_beam:gpclone id_beam5,id_beam:
+	gpclone id_beam6,id_beam:gpclone id_beam7,id_beam:gpclone id_beam8,id_beam:gpclone id_beam9,id_beam:gpclone id_beam10,id_beam:
+	gpclone id_beam11,id_beam:gpclone id_beam12,id_beam:gpclone id_beam13,id_beam:gpclone id_beam14,id_beam:gpclone id_beam15,id_beam:
+	gpclone id_beam16,id_beam:gpclone id_beam17,id_beam:gpclone id_beam18,id_beam:gpclone id_beam19,id_beam:gpclone id_beam20,id_beam:
+	gpclone id_beam21,id_beam:gpclone id_beam22,id_beam:gpclone id_beam23,id_beam:gpclone id_beam24,id_beam:gpclone id_beam25,id_beam:
+	gpclone id_beam26,id_beam:gpclone id_beam27,id_beam:gpclone id_beam28,id_beam:gpclone id_beam29,id_beam:gpclone id_beam30,id_beam:
+	gpclone id_beam31,id_beam:gpclone id_beam32,id_beam:gpclone id_beam33,id_beam:gpclone id_beam34,id_beam:gpclone id_beam35,id_beam:
+	gpclone id_beam36,id_beam:gpclone id_beam37,id_beam:gpclone id_beam38,id_beam:gpclone id_beam39,id_beam:gpclone id_beam40,id_beam:
+	gpclone id_beam41,id_beam:gpclone id_beam42,id_beam:
+	
+	ddim Lposx
+	ddim Lposy
+	ddim Lposz
+
+	Lposx = -1000,-950,-900,-850,-800,750,-700,-650,-600,-550,-500,-450,-400,-350,-300,-250,-200,-150,-100,-50,0,5000,100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900,950,1000
+	Lposy = 500,-100,400,-200,300,-300,200,-400,100,-500,500,-100,400,-200,300,-300,200,-400,100,-500,500,-100,400,-200,300,-300,200,-400,100,-500,500,-100,400,-200,300,-300,200,-400,100,-500,500
+
+
+
+	setpos id_beam1,-1000,500,0
+	setpos id_beam2,-900,-500,0
+	setpos id_beam3,-800,500,0
+	setpos id_beam4,-700,-500,0
+	setpos id_beam5,-600,500,0
+	setpos id_beam6,-500,-500,0
+	setpos id_beam7,-400,500,0
+	setpos id_beam8,-300,-500,0
+	setpos id_beam9,-200,500,0
+	setpos id_beam10,-100,-500,0
+	setpos id_beam11,0,500,0
+	setpos id_beam12,100,-500,0
+	setpos id_beam13,200,500,0
+	setpos id_beam14,300,-500,0
+	setpos id_beam15,400,500,0
+	setpos id_beam16,500,-500,0
+	setpos id_beam17,600,500,0
+	setpos id_beam18,700,-500,0
+	setpos id_beam19,800,500,0
+	setpos id_beam20,900,-500,0
+	setpos id_beam21,1000,500,0
+
+	setpos id_beam22,-900,-500,0
+	setpos id_beam23,-800,500,0
+	setpos id_beam24,-700,-500,0
+	setpos id_beam25,-600,500,0
+	setpos id_beam26,-500,-500,0
+	setpos id_beam27,-400,500,0
+	setpos id_beam28,-300,-500,0
+	setpos id_beam29,-200,500,0
+	setpos id_beam30,-100,-500,0
+	setpos id_beam31,0,500,0
+	setpos id_beam32,100,-500,0
+	setpos id_beam33,200,500,0
+	setpos id_beam34,300,-500,0
+	setpos id_beam35,400,500,0
+	setpos id_beam36,500,-500,0
+	setpos id_beam37,600,500,0
+	setpos id_beam38,700,-500,0
+	setpos id_beam39,800,500,0
+	setpos id_beam40,900,-500,0
+	setpos id_beam41,1000,500,0
+	
+	
+	setcls CLSMODE_SOLID, $051e37//$404040		; 背景色
+	
+	model_x = 0 : model_y = 30 : model_z = 0
+	angr_x = 0  : angr_y = 64  : angr_z = -50
+	cam_x = 0   : cam_y = 40   : cam_z = 60
+	x=0         : y=60         : z=0
+	model_rx=0  : model_ry=0   : Energy = 1000
+	loop_x = 0  : loop_y = 0   : loop_z = 0
+	flg = 0     : objjudge = -1 : objjudge2 = -1
+	
+	objx = 0    : objy = 30    : objz = -80
+
+	flg1 = -1   : flg2 = -1    : flg3 = -1
+	flg4 = -1   : flg5 = -1    : flgxx = 0
+
+	//　ビーム移動方向
+	pmlistx = 1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1
+	pmlisty = 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	
+	setcoli id_box,   2, 1
+	setcoli id_model, 1,0
+
+repeat
+	
+	// screen 0,1280,720
+	redraw 0			; 描画開始
+
+	gpdraw				; シーンの描画
+
+	color 255,255,255
+	pos 8,8:mes "Dangerous flying in the cube zone with jelly Lv.2"
+	mes "ワールド右限まで:   約 "+str((1000-model_x)/10)+"M"
+	mes "ワールド左限まで:   約 "+str((1000+model_x)/10)+"M"
+	mes "ワールド上限まで:   約 "+str((500-model_y)/10)+"M"
+	mes "ワールド下限まで:   約 "+str((500+model_y)/10)+"M"
+	mes "スタートからの距離: 約 "+str((-1*model_z)/10)+"M"
+	mes "ハイパワーメーター: 約 "+str(Energy-96)
+	mes Lposx(21)
+	mes Lposy(21)
+	
+	if str((1000-model_x)/10) = 0 :goto *fail_world
+	if str((1000+model_x)/10) = 0 :goto *fail_world
+	if str((500-model_y)/10) = 0 :goto *fail_world
+	if str((500+model_y)/10) = 0 :goto *fail_world
+	if model_z/10 <= -4500: goto *success
+
+	redraw 1			; 描画終了
+	await 1000/60			; 待ち時間
+
+	if angr_x != 0{
+		if angr_x <= -1:angr_x+=1
+		if angr_x >= 1:angr_x-=1
+	}
+	if angr_y != 64{
+		if angr_y >= 65:angr_y-=1
+		if angr_y <= 63:angr_y+=1
+	}
+
+	//left
+	key = 0
+	getkey key1, 37 
+	if key1 = 1 and cam_z-model_z<1{
+		if cam_x>model_x{
+			cam_x=cam_x+key1
+			cam_z=cam_z+key1
+			flg = 11
+		}
+		else{
+			cam_x=cam_x+key1
+			cam_z=cam_z-key1
+			flg = 22
+		}
+		
+	}
+	if key1 = 1 and cam_z-model_z>0{
+		if cam_x>model_x{
+			cam_x=cam_x-key1
+			cam_z=cam_z+key1
+			flg = 33
+		}
+		else{
+			cam_x=cam_x-key1
+			cam_z=cam_z-key1
+			flg = 44
+		}
+	}
+	if cam_z-model_z>61:cam_z=model_z+60
+
+	//right
+	key3 = 0
+	getkey key3, 39 
+	if key3 = 1 and cam_z-model_z<1{
+		if cam_x>model_x{
+			cam_x=cam_x-key3
+			cam_z=cam_z-key3
+			flg = 11
+		}
+		else{
+			cam_x=cam_x-key3
+			cam_z=cam_z+key3
+			flg = 22
+		}
+	}
+	if key3 = 1 and cam_z-model_z>0{
+		if cam_x>model_x{
+			cam_x=cam_x+key3
+			cam_z=cam_z-key3
+			flg = 33
+		}
+		else{
+			cam_x=cam_x+key3
+			cam_z=cam_z+key3
+			flg = 44
+		}
+	}
+	
+	
+	//up
+	getkey key2, 38
+	if key2 = 1 : model_y += 1 :cam_y+=1:point+=1
+	key2 = 0
+
+	
+	//down
+	getkey key4, 40 
+	if key4 = 1 : model_y -= 1 :cam_y-=1:point+=1
+	key4 = 0
+	//enter
+	getkey key5, 13
+	if key5 = 1 {
+		cam_x=model_x
+		cam_y=model_y
+		cam_z=model_z+60
+		model_rx=-0
+	}
+	key5 = 0
+	//w
+	getkey key6, 87
+	if key6 = 1 : model_x=model_x		//model_z -= 1 :cam_z -=1
+	key6 = 0
+	
+	//a
+	key8 = 0
+	getkey key8, 65
+	if key8 = 1{
+		cam_x -=1
+		model_x-=1
+		model_rx-=1
+		angr_y+=2
+	}
+	key9 = 0
+	//d
+	getkey key9, 68 
+	if key9 = 1 {
+		cam_x +=1
+		model_x+=1 
+		model_rx+=1 
+		angr_y-=2
+	}
+	if angr_y >= 73 : angr_y=72
+	if angr_y <= 55 : angr_y=56
+	//s
+	getkey key7, 83 
+		if key7 = 1 {
+			model_z += 1 
+			cam_z +=1
+			angr_x+=2
+		}
+	key7 = 0
+	
+	//space 
+	getkey key10, 32
+	Accel = 0
+	If Energy <= 5000 : Energy +=2
+	if key10 = 1 {
+		Accel = 1
+		angr_x-=2
+	}
+	if angr_x >= 9 : angr_x=8
+	if angr_x <= -5 : angr_x=-4
+	key10 = 0
+	getkey esc, 27
+		if esc = 1 :goto *start:stop
+	esc = 0
+	
+	//Autoスクロール
+	if Accel = 1{
+		if Energy > 100{
+			model_z -= 7
+			cam_z -=7
+			Energy-=7
+		}
+	}
+	if Accel = 0{
+		model_z -= 5 
+		cam_z -=5
+	}
+	
+	if Energy <= 0:Energy = 0
+	if Energy<=5000 :Energy+=1
+	if Energy = 3097:Energy=3096
+
+// モデル可動範囲制限
+	if model_y>501 :model_y = 500
+	if model_y<-501 :model_y = -500
+	if model_x>1001 :model_x = 1000 
+	if model_x<-1001 :model_x = -1000 
+	if cam_y>501 :cam_y = 500
+	if cam_y<-501 :cam_y = -500
+	
+	if model_y+60 <cam_y:cam_y = model_y+60
+	if model_y-60 >cam_y:cam_y = model_y-60
+
+	gplookat GPOBJ_CAMERA0,model_x,model_y,model_z
+	setpos GPOBJ_CAMERA0,cam_x,model_y+10,cam_z	
+	setpos id_model,model_x,model_y,model_z
+	setangr id_model,angr_x,angr_y,angr_z
+	
+	if angr_y = 320:angr_y = 64
+	if angr_y = 63 :angr_y = 319 
+	
+
+	flg1 = -1 : flg2 = -1 :	flg3 = -1 :	flg4 = -1 :	flg5 = -1
+	
+	repeat 41
+	if cnt!=21{
+		if Lposx(cnt) >= 1001{
+			pmlistx(cnt) = 0
+			Lposx(cnt) = Lposx(cnt)-3
+		}
+		if Lposx(cnt) <= -1001{
+			pmlistx(cnt) = 1
+			Lposx(cnt) = Lposx(cnt)+3
+		}
+
+		if pmlistx(cnt) = 1{
+			Lposx(cnt) = Lposx(cnt)+1
+		}else{
+			Lposx(cnt) = Lposx(cnt)-1
+		}
+
+		if Lposy(cnt) >= 501{
+			pmlisty(cnt) = 1
+		}
+		if Lposy(cnt) <= -501{
+			pmlisty(cnt) = 0 
+		}
+
+		if pmlisty(cnt) = 1{
+			Lposy(cnt) = Lposy(cnt)-1
+		}else{
+			Lposy(cnt) = Lposy(cnt)+1
+		}
+	}
+	loop
+
+
+	setpos id_beam1,Lposx(0),Lposy(0),0
+	setpos id_beam2,Lposx(1),Lposy(1),0
+	setpos id_beam3,Lposx(2),Lposy(2),0
+	setpos id_beam4,Lposx(3),Lposy(3),0
+	setpos id_beam5,Lposx(4),Lposy(4),0
+	setpos id_beam6,Lposx(5),Lposy(5),0
+	setpos id_beam7,Lposx(6),Lposy(6),0
+	setpos id_beam8,Lposx(7),Lposy(7),0
+	setpos id_beam9,Lposx(8),Lposy(8),0
+	setpos id_beam10,Lposx(9),Lposy(9),0
+	setpos id_beam11,Lposx(10),Lposy(10),0
+	setpos id_beam12,Lposx(11),Lposy(11),0
+	setpos id_beam13,Lposx(12),Lposy(12),0
+	setpos id_beam14,Lposx(13),Lposy(13),0
+	setpos id_beam15,Lposx(14),Lposy(14),0
+	setpos id_beam16,Lposx(15),Lposy(15),0
+	setpos id_beam17,Lposx(16),Lposy(16),0
+	setpos id_beam18,Lposx(17),Lposy(17),0
+	setpos id_beam19,Lposx(18),Lposy(18),0
+	setpos id_beam20,Lposx(19),Lposy(19),0
+	setpos id_beam21,Lposx(20),Lposy(20),0
+	// setpos id_beam22,Lposx(21),Lposy(21),0//jdblavukhdnvlawi;wven
+	setpos id_beam23,Lposx(22),Lposy(22),0
+	setpos id_beam24,Lposx(23),Lposy(23),0
+	setpos id_beam25,Lposx(24),Lposy(24),0
+	setpos id_beam26,Lposx(25),Lposy(25),0
+	setpos id_beam27,Lposx(26),Lposy(26),0
+	setpos id_beam28,Lposx(27),Lposy(27),0
+	setpos id_beam29,Lposx(28),Lposy(28),0
+	setpos id_beam30,Lposx(29),Lposy(29),0
+	setpos id_beam31,Lposx(30),Lposy(30),0
+	setpos id_beam32,Lposx(31),Lposy(31),0
+	setpos id_beam33,Lposx(32),Lposy(32),0
+	setpos id_beam34,Lposx(33),Lposy(33),0
+	setpos id_beam35,Lposx(34),Lposy(34),0
+	setpos id_beam36,Lposx(35),Lposy(35),0
+	setpos id_beam37,Lposx(36),Lposy(36),0
+	setpos id_beam38,Lposx(37),Lposy(37),0
+	setpos id_beam39,Lposx(38),Lposy(38),0
+	setpos id_beam30,Lposx(39),Lposy(19),0
+	setpos id_beam31,Lposx(40),Lposy(40),0
+
+
+
+	//id_model側接触エリア設定 ビームの用意数分ループする
+	repeat 41
+	if cnt!=21{
+		if model_x-30<=Lposx(cnt){
+			if Lposx(cnt)<=model_x+30{
+				if model_y-10<=Lposy(cnt){
+					if Lposy(cnt)<=model_y{
+						
+						// setpos id_model,50,50,50
+						// setpos GPOBJ_CAMERA0,model_x,model_y,model_z
+						// stop//後で消す
+						mmload "res/bomb2.mp3",16,0
+						mmplay 16
+
+						redraw 0
+						redraw 1
+						
+						gpreset
+						await 10
+						goto *fail
+						stop
+					}
+				}
+			}
+		}
+	}
+
+	loop
+
+
+loop
+stop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*main3
+	
+	mmload "res/drum1.mp3",32,0
+	mmvol 32,0
+	mmplay 32
+	
+// *main
+	// if selectlv = 1 :stop
+	gpreset
+	setcls CLSMODE_SOLID, 0		; 画面クリア設定
+	setpos GPOBJ_CAMERA0, 0,35,100	; カメラ位置を設定
+	
+	gpload id_model, "res/jelly_hsp_flight_color2"		; インポート
+	// gpload id_model, "res/cube"
+	setpos id_model,0,30,0 ;初期ポジション
+	setangr id_model ,0, 64,-50 ;初期回転合い
+	setcoli id_model,1,2
+
+	gpload id_go, "res/cnt02"		; インポート
+	setpos id_go,0,30,-100 ;初期ポジション
+	setangr id_go ,0, 0,0 ;初期回転合い
+	setcoli id_go,1,2
+	setscale id_go, 27,27,27
+
+	gpload id_build,"res/area11"
+	setpos id_build,50,-200,-1000
+	setscale id_build,20,20,20
+
+	gpload id_beam,"res/beam1"
+	setpos id_beam,1500,1500,0
+	setscale id_beam,10,10,10
+
+	gpclone id_beam1,id_beam:gpclone id_beam2,id_beam:gpclone id_beam3,id_beam:gpclone id_beam4,id_beam:gpclone id_beam5,id_beam:
+	gpclone id_beam6,id_beam:gpclone id_beam7,id_beam:gpclone id_beam8,id_beam:gpclone id_beam9,id_beam:gpclone id_beam10,id_beam:
+	gpclone id_beam11,id_beam:gpclone id_beam12,id_beam:gpclone id_beam13,id_beam:gpclone id_beam14,id_beam:gpclone id_beam15,id_beam:
+	gpclone id_beam16,id_beam:gpclone id_beam17,id_beam:gpclone id_beam18,id_beam:gpclone id_beam19,id_beam:gpclone id_beam20,id_beam:
+	gpclone id_beam21,id_beam:gpclone id_beam22,id_beam:gpclone id_beam23,id_beam:gpclone id_beam24,id_beam:gpclone id_beam25,id_beam:
+	gpclone id_beam26,id_beam:gpclone id_beam27,id_beam:gpclone id_beam28,id_beam:gpclone id_beam29,id_beam:gpclone id_beam30,id_beam:
+	gpclone id_beam31,id_beam:gpclone id_beam32,id_beam:gpclone id_beam33,id_beam:gpclone id_beam34,id_beam:gpclone id_beam35,id_beam:
+	gpclone id_beam36,id_beam:gpclone id_beam37,id_beam:gpclone id_beam38,id_beam:gpclone id_beam39,id_beam:gpclone id_beam40,id_beam:
+	gpclone id_beam41,id_beam:gpclone id_beam42,id_beam:gpclone id_beam43,id_beam:gpclone id_beam44,id_beam:gpclone id_beam45,id_beam:
+	gpclone id_beam46,id_beam:gpclone id_beam47,id_beam:gpclone id_beam48,id_beam:gpclone id_beam49,id_beam:gpclone id_beam50,id_beam:
+	gpclone id_beam51,id_beam:gpclone id_beam52,id_beam:gpclone id_beam53,id_beam:gpclone id_beam34,id_beam:gpclone id_beam35,id_beam:
+	gpclone id_beam56,id_beam:gpclone id_beam57,id_beam:gpclone id_beam58,id_beam:gpclone id_beam59,id_beam:gpclone id_beam60,id_beam:gpclone id_beam61,id_beam:
+	
+	ddim Lposx
+	ddim Lposy
+	ddim Lposz
+        //     0    1    2    3    4   5    6    7    8    9    0    1    2    3    4    5    6    7    8   9  0   1   2   3   4   5   6   7   8   9   0   1   2   3   4   5   6   7   8   9    0   1   2    3   4    5   6    7   8    9   0    1   2    3   4    5   6    7   8    9   0    1
+	Lposx = -1000,-950,-900,-850,-800,750,-700,-650,-600,-550,-500,-450,-400,-350,-300,-250,-200,-150,-100,-50,0,5000,100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900,950,1000,810,420,-630,240,-850,660,-470,180,-790,500,-510,320,-130,940,-750,560,-370,180,-990,600,-110
+	Lposy = 500,-100,400,-200,300,-300,200,-400,100,-500,500,-100,400,-200,300,-300,200,-400,100,-500,500,-100,400,-200,300,-300,200,-400,100,-500,500,-100,400,-200,300,-300,200,-400,100,-500,500,500,-100,400,-200,300,-300,200,-400,100,-500,500,-100,400,-200,300,-300,200,-400,100,-500,500
+		//   0    1   2    3   4    5   6    7   8    9   0    1   2    3   4    5   6    7   8    9   0    1   2    3   4    5   6    7   8    9   0    1   2    3   4    5   6    7   8    9   0   1    2   3    4   5    6   7    8   9    0   1    2   3    4   5    6   7    8   9    0    1
+
+
+	setpos id_beam1,-1000,500,0
+	setpos id_beam2,-900,-500,0
+	setpos id_beam3,-800,500,0
+	setpos id_beam4,-700,-500,0
+	setpos id_beam5,-600,500,0
+	setpos id_beam6,-500,-500,0
+	setpos id_beam7,-400,500,0
+	setpos id_beam8,-300,-500,0
+	setpos id_beam9,-200,500,0
+	setpos id_beam10,-100,-500,0
+	setpos id_beam11,0,500,0
+	setpos id_beam12,100,-500,0
+	setpos id_beam13,200,500,0
+	setpos id_beam14,300,-500,0
+	setpos id_beam15,400,500,0
+	setpos id_beam16,500,-500,0
+	setpos id_beam17,600,500,0
+	setpos id_beam18,700,-500,0
+	setpos id_beam19,800,500,0
+	setpos id_beam20,900,-500,0
+	setpos id_beam21,1000,500,0
+
+	setpos id_beam22,-900,-500,0
+	setpos id_beam23,-800,500,0
+	setpos id_beam24,-700,-500,0
+	setpos id_beam25,-600,500,0
+	setpos id_beam26,-500,-500,0
+	setpos id_beam27,-400,500,0
+	setpos id_beam28,-300,-500,0
+	setpos id_beam29,-200,500,0
+	setpos id_beam30,-100,-500,0
+	setpos id_beam31,0,500,0
+	setpos id_beam32,100,-500,0
+	setpos id_beam33,200,500,0
+	setpos id_beam34,300,-500,0
+	setpos id_beam35,400,500,0
+	setpos id_beam36,500,-500,0
+	setpos id_beam37,600,500,0
+	setpos id_beam38,700,-500,0
+	setpos id_beam39,800,500,0
+	setpos id_beam40,900,-500,0
+	setpos id_beam41,1000,500,0
+
+	
+	setpos id_beam42,-900,-500,0
+	setpos id_beam43,-800,500,0
+	setpos id_beam44,-700,-500,0
+	setpos id_beam45,-600,500,0
+	setpos id_beam46,-500,-500,0
+	setpos id_beam47,-400,500,0
+	setpos id_beam48,-300,-500,0
+	setpos id_beam49,-200,500,0
+	setpos id_beam50,-100,-500,0
+	setpos id_beam51,0,500,0
+	setpos id_beam52,100,-500,0
+	setpos id_beam53,200,500,0
+	setpos id_beam54,300,-500,0
+	setpos id_beam55,400,500,0
+	setpos id_beam56,500,-500,0
+	setpos id_beam57,600,500,0
+	setpos id_beam58,700,-500,0
+	setpos id_beam59,800,500,0
+	setpos id_beam60,900,-500,0
+	setpos id_beam61,1000,500,0
+	
+	
+	setcls CLSMODE_SOLID, $8ce3fb//$404040		; 背景色
+	
+	model_x = 0 : model_y = 30 : model_z = 0
+	angr_x = 0  : angr_y = 64  : angr_z = -50
+	cam_x = 0   : cam_y = 40   : cam_z = 60
+	x=0         : y=60         : z=0
+	model_rx=0  : model_ry=0   : Energy = 1000
+	loop_x = 0  : loop_y = 0   : loop_z = 0
+	flg = 0     : objjudge = -1 : objjudge2 = -1
+	
+	objx = 0    : objy = 30    : objz = -80
+
+	flg1 = -1   : flg2 = -1    : flg3 = -1
+	flg4 = -1   : flg5 = -1    : flgxx = 0
+
+	//　ビーム移動方向
+	pmlistx = 1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1
+	pmlisty = 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	
+	setcoli id_box,   2, 1
+	setcoli id_model, 1,0
+
+repeat
+	
+	// screen 0,1280,720
+	redraw 0			; 描画開始
+
+	gpdraw				; シーンの描画
+
+	color 255,255,255
+	pos 8,8:mes "Dangerous flying in the cube zone with jelly Lv.3"
+	mes "ワールド右限まで:   約 "+str((1000-model_x)/10)+"M"
+	mes "ワールド左限まで:   約 "+str((1000+model_x)/10)+"M"
+	mes "ワールド上限まで:   約 "+str((500-model_y)/10)+"M"
+	mes "ワールド下限まで:   約 "+str((500+model_y)/10)+"M"
+	mes "スタートからの距離: 約 "+str((-1*model_z)/10)+"M"
+	mes "ハイパワーメーター: 約 "+str(Energy-96)
+	mes Lposx(21)
+	mes Lposy(21)
+	
+	if str((1000-model_x)/10) = 0 :goto *fail_world
+	if str((1000+model_x)/10) = 0 :goto *fail_world
+	if str((500-model_y)/10) = 0 :goto *fail_world
+	if str((500+model_y)/10) = 0 :goto *fail_world
+	if model_z/10 <= -4500: goto *success
+
+	redraw 1			; 描画終了
+	await 1000/60			; 待ち時間
+
+	if angr_x != 0{
+		if angr_x <= -1:angr_x+=1
+		if angr_x >= 1:angr_x-=1
+	}
+	if angr_y != 64{
+		if angr_y >= 65:angr_y-=1
+		if angr_y <= 63:angr_y+=1
+	}
+
+	//left
+	key = 0
+	getkey key1, 37 
+	if key1 = 1 and cam_z-model_z<1{
+		if cam_x>model_x{
+			cam_x=cam_x+key1
+			cam_z=cam_z+key1
+			flg = 11
+		}
+		else{
+			cam_x=cam_x+key1
+			cam_z=cam_z-key1
+			flg = 22
+		}
+		
+	}
+	if key1 = 1 and cam_z-model_z>0{
+		if cam_x>model_x{
+			cam_x=cam_x-key1
+			cam_z=cam_z+key1
+			flg = 33
+		}
+		else{
+			cam_x=cam_x-key1
+			cam_z=cam_z-key1
+			flg = 44
+		}
+	}
+	if cam_z-model_z>61:cam_z=model_z+60
+
+	//right
+	key3 = 0
+	getkey key3, 39 
+	if key3 = 1 and cam_z-model_z<1{
+		if cam_x>model_x{
+			cam_x=cam_x-key3
+			cam_z=cam_z-key3
+			flg = 11
+		}
+		else{
+			cam_x=cam_x-key3
+			cam_z=cam_z+key3
+			flg = 22
+		}
+	}
+	if key3 = 1 and cam_z-model_z>0{
+		if cam_x>model_x{
+			cam_x=cam_x+key3
+			cam_z=cam_z-key3
+			flg = 33
+		}
+		else{
+			cam_x=cam_x+key3
+			cam_z=cam_z+key3
+			flg = 44
+		}
+	}
+	
+	
+	//up
+	getkey key2, 38
+	if key2 = 1 : model_y += 1 :cam_y+=1:point+=1
+	key2 = 0
+
+	
+	//down
+	getkey key4, 40 
+	if key4 = 1 : model_y -= 1 :cam_y-=1:point+=1
+	key4 = 0
+	//enter
+	getkey key5, 13
+	if key5 = 1 {
+		cam_x=model_x
+		cam_y=model_y
+		cam_z=model_z+60
+		model_rx=-0
+	}
+	key5 = 0
+	//w
+	getkey key6, 87
+	if key6 = 1 : model_x=model_x		//model_z -= 1 :cam_z -=1
+	key6 = 0
+	
+	//a
+	key8 = 0
+	getkey key8, 65
+	if key8 = 1{
+		cam_x -=1
+		model_x-=1
+		model_rx-=1
+		angr_y+=2
+	}
+	key9 = 0
+	//d
+	getkey key9, 68 
+	if key9 = 1 {
+		cam_x +=1
+		model_x+=1 
+		model_rx+=1 
+		angr_y-=2
+	}
+	if angr_y >= 73 : angr_y=72
+	if angr_y <= 55 : angr_y=56
+	//s
+	getkey key7, 83 
+		if key7 = 1 {
+			model_z += 1 
+			cam_z +=1
+			angr_x+=2
+		}
+	key7 = 0
+	
+	//space 
+	getkey key10, 32
+	Accel = 0
+	If Energy <= 5000 : Energy +=2
+	if key10 = 1 {
+		Accel = 1
+		angr_x-=2
+	}
+	if angr_x >= 9 : angr_x=8
+	if angr_x <= -5 : angr_x=-4
+	key10 = 0
+	getkey esc, 27
+		if esc = 1 :goto *start:stop
+	esc = 0
+	
+	//Autoスクロール
+	if Accel = 1{
+		if Energy > 100{
+			model_z -= 7
+			cam_z -=7
+			Energy-=7
+		}
+	}
+	if Accel = 0{
+		model_z -= 5 
+		cam_z -=5
+	}
+	
+	if Energy <= 0:Energy = 0
+	if Energy<=5000 :Energy+=1
+	if Energy = 3097:Energy=3096
+
+// モデル可動範囲制限
+	if model_y>501 :model_y = 500
+	if model_y<-501 :model_y = -500
+	if model_x>1001 :model_x = 1000 
+	if model_x<-1001 :model_x = -1000 
+	if cam_y>501 :cam_y = 500
+	if cam_y<-501 :cam_y = -500
+	
+	if model_y+60 <cam_y:cam_y = model_y+60
+	if model_y-60 >cam_y:cam_y = model_y-60
+
+	gplookat GPOBJ_CAMERA0,model_x,model_y,model_z
+	setpos GPOBJ_CAMERA0,cam_x,model_y+10,cam_z	
+	setpos id_model,model_x,model_y,model_z
+	setangr id_model,angr_x,angr_y,angr_z
+	
+	if angr_y = 320:angr_y = 64
+	if angr_y = 63 :angr_y = 319 
+	
+
+	flg1 = -1 : flg2 = -1 :	flg3 = -1 :	flg4 = -1 :	flg5 = -1
+	
+	repeat 41
+	if cnt!=21{
+		if Lposx(cnt) >= 1001{
+			pmlistx(cnt) = 0
+			Lposx(cnt) = Lposx(cnt)-3
+		}
+		if Lposx(cnt) <= -1001{
+			pmlistx(cnt) = 1
+			Lposx(cnt) = Lposx(cnt)+3
+		}
+
+		if pmlistx(cnt) = 1{
+			Lposx(cnt) = Lposx(cnt)+1
+		}else{
+			Lposx(cnt) = Lposx(cnt)-1
+		}
+
+		if Lposy(cnt) >= 501{
+			pmlisty(cnt) = 1
+		}
+		if Lposy(cnt) <= -501{
+			pmlisty(cnt) = 0 
+		}
+
+		if pmlisty(cnt) = 1{
+			Lposy(cnt) = Lposy(cnt)-1
+		}else{
+			Lposy(cnt) = Lposy(cnt)+1
+		}
+	}
+	loop
+
+
+	setpos id_beam1,Lposx(0),Lposy(0),0
+	setpos id_beam2,Lposx(1),Lposy(1),0
+	setpos id_beam3,Lposx(2),Lposy(2),0
+	setpos id_beam4,Lposx(3),Lposy(3),0
+	setpos id_beam5,Lposx(4),Lposy(4),0
+	setpos id_beam6,Lposx(5),Lposy(5),0
+	setpos id_beam7,Lposx(6),Lposy(6),0
+	setpos id_beam8,Lposx(7),Lposy(7),0
+	setpos id_beam9,Lposx(8),Lposy(8),0
+	setpos id_beam10,Lposx(9),Lposy(9),0
+	setpos id_beam11,Lposx(10),Lposy(10),0
+	setpos id_beam12,Lposx(11),Lposy(11),0
+	setpos id_beam13,Lposx(12),Lposy(12),0
+	setpos id_beam14,Lposx(13),Lposy(13),0
+	setpos id_beam15,Lposx(14),Lposy(14),0
+	setpos id_beam16,Lposx(15),Lposy(15),0
+	setpos id_beam17,Lposx(16),Lposy(16),0
+	setpos id_beam18,Lposx(17),Lposy(17),0
+	setpos id_beam19,Lposx(18),Lposy(18),0
+	setpos id_beam20,Lposx(19),Lposy(19),0
+	setpos id_beam21,Lposx(20),Lposy(20),0
+	// setpos id_beam22,Lposx(21),Lposy(21),0//jdblavukhdnvlawi;wven
+	setpos id_beam23,Lposx(22),Lposy(22),0
+	setpos id_beam24,Lposx(23),Lposy(23),0
+	setpos id_beam25,Lposx(24),Lposy(24),0
+	setpos id_beam26,Lposx(25),Lposy(25),0
+	setpos id_beam27,Lposx(26),Lposy(26),0
+	setpos id_beam28,Lposx(27),Lposy(27),0
+	setpos id_beam29,Lposx(28),Lposy(28),0
+	setpos id_beam30,Lposx(29),Lposy(29),0
+	setpos id_beam31,Lposx(30),Lposy(30),0
+	setpos id_beam32,Lposx(31),Lposy(31),0
+	setpos id_beam33,Lposx(32),Lposy(32),0
+	setpos id_beam34,Lposx(33),Lposy(33),0
+	setpos id_beam35,Lposx(34),Lposy(34),0
+	setpos id_beam36,Lposx(35),Lposy(35),0
+	setpos id_beam37,Lposx(36),Lposy(36),0
+	setpos id_beam38,Lposx(37),Lposy(37),0
+	setpos id_beam39,Lposx(38),Lposy(38),0
+	setpos id_beam40,Lposx(39),Lposy(19),0
+	setpos id_beam41,Lposx(40),Lposy(40),0
+	
+
+
+	//id_model側接触エリア設定 ビームの用意数分ループする
+	repeat 41
+	if cnt!=21{
+		if model_x-30<=Lposx(cnt){
+			if Lposx(cnt)<=model_x+30{
+				if model_y-10<=Lposy(cnt){
+					if Lposy(cnt)<=model_y{
+						
+						// setpos id_model,50,50,50
+						// setpos GPOBJ_CAMERA0,model_x,model_y,model_z
+						// stop//後で消す
+						mmload "res/bomb2.mp3",16,0
+						mmplay 16
+
+						redraw 0
+						redraw 1
+						
+						gpreset
+						await 10
+						goto *fail
+						stop
+					}
+				}
+			}
+		}
+	}
+
+	loop
+
+
+loop
+stop
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*main4
+	
+	mmload "res/drum1.mp3",32,0
+	mmvol 32,0 
+	mmplay 32
+	
+// *main
+	// if selectlv = 1 :stop
+	gpreset
+	setcls CLSMODE_SOLID, 0		; 画面クリア設定
+	setpos GPOBJ_CAMERA0, 0,35,100	; カメラ位置を設定
+	
+	gpload id_model, "res/jelly_hsp_flight_color2"		; インポート
+	// gpload id_model, "res/cube"
+	setpos id_model,0,30,0 ;初期ポジション
+	setangr id_model ,0, 64,-50 ;初期回転合い
+	setcoli id_model,1,2
+
+	gpload id_go, "res/cnt02"		; インポート
+	setpos id_go,0,30,-100 ;初期ポジション
+	setangr id_go ,0, 0,0 ;初期回転合い
+	setcoli id_go,1,2
+	setscale id_go, 27,27,27
+
+	gpload id_build,"res/area11"
+	setpos id_build,50,-200,-1000
+	setscale id_build,20,20,20
+
+	gpload id_beam,"res/beam1"
+	setpos id_beam,1500,1500,0
+	setscale id_beam,10,10,10
+
+	gpclone id_beam1,id_beam:gpclone id_beam2,id_beam:gpclone id_beam3,id_beam:gpclone id_beam4,id_beam:gpclone id_beam5,id_beam:
+	gpclone id_beam6,id_beam:gpclone id_beam7,id_beam:gpclone id_beam8,id_beam:gpclone id_beam9,id_beam:gpclone id_beam10,id_beam:
+	gpclone id_beam11,id_beam:gpclone id_beam12,id_beam:gpclone id_beam13,id_beam:gpclone id_beam14,id_beam:gpclone id_beam15,id_beam:
+	gpclone id_beam16,id_beam:gpclone id_beam17,id_beam:gpclone id_beam18,id_beam:gpclone id_beam19,id_beam:gpclone id_beam20,id_beam:
+	gpclone id_beam21,id_beam:gpclone id_beam22,id_beam:gpclone id_beam23,id_beam:gpclone id_beam24,id_beam:gpclone id_beam25,id_beam:
+	gpclone id_beam26,id_beam:gpclone id_beam27,id_beam:gpclone id_beam28,id_beam:gpclone id_beam29,id_beam:gpclone id_beam30,id_beam:
+	gpclone id_beam31,id_beam:gpclone id_beam32,id_beam:gpclone id_beam33,id_beam:gpclone id_beam34,id_beam:gpclone id_beam35,id_beam:
+	gpclone id_beam36,id_beam:gpclone id_beam37,id_beam:gpclone id_beam38,id_beam:gpclone id_beam39,id_beam:gpclone id_beam40,id_beam:
+	gpclone id_beam41,id_beam:gpclone id_beam42,id_beam:gpclone id_beam43,id_beam:gpclone id_beam44,id_beam:gpclone id_beam45,id_beam:
+	gpclone id_beam46,id_beam:gpclone id_beam47,id_beam:gpclone id_beam48,id_beam:gpclone id_beam49,id_beam:gpclone id_beam50,id_beam:
+	gpclone id_beam51,id_beam:gpclone id_beam52,id_beam:gpclone id_beam53,id_beam:gpclone id_beam34,id_beam:gpclone id_beam35,id_beam:
+	gpclone id_beam56,id_beam:gpclone id_beam57,id_beam:gpclone id_beam58,id_beam:gpclone id_beam59,id_beam:gpclone id_beam60,id_beam:gpclone id_beam61,id_beam:
+	
+	ddim Lposx
+	ddim Lposy
+	ddim Lposz
+        //     0    1    2    3    4   5    6    7    8    9    0    1    2    3    4    5    6    7    8   9  0   1   2   3   4   5   6   7   8   9   0   1   2   3   4   5   6   7   8   9    0   1   2    3   4    5   6    7   8    9   0    1   2    3   4    5   6    7   8    9   0    1
+	Lposx = -1000,-950,-900,-850,-800,750,-700,-650,-600,-550,-500,-450,-400,-350,-300,-250,-200,-150,-100,-50,0,5000,100,150,200,250,300,350,400,450,500,550,600,650,700,750,800,850,900,950,1000,810,420,-630,240,-850,660,-470,180,-790,500,-510,320,-130,940,-750,560,-370,180,-990,600,-110
+	Lposy = 500,-100,400,-200,300,-300,200,-400,100,-500,500,-100,400,-200,300,-300,200,-400,100,-500,500,-100,400,-200,300,-300,200,-400,100,-500,500,-100,400,-200,300,-300,200,-400,100,-500,500,500,-100,400,-200,300,-300,200,-400,100,-500,500,-100,400,-200,300,-300,200,-400,100,-500,500
+		//   0    1   2    3   4    5   6    7   8    9   0    1   2    3   4    5   6    7   8    9   0    1   2    3   4    5   6    7   8    9   0    1   2    3   4    5   6    7   8    9   0   1    2   3    4   5    6   7    8   9    0   1    2   3    4   5    6   7    8   9    0    1
+
+
+	setpos id_beam1,-1000,500,0
+	setpos id_beam2,-900,-500,0
+	setpos id_beam3,-800,500,0
+	setpos id_beam4,-700,-500,0
+	setpos id_beam5,-600,500,0
+	setpos id_beam6,-500,-500,0
+	setpos id_beam7,-400,500,0
+	setpos id_beam8,-300,-500,0
+	setpos id_beam9,-200,500,0
+	setpos id_beam10,-100,-500,0
+	setpos id_beam11,0,500,0
+	setpos id_beam12,100,-500,0
+	setpos id_beam13,200,500,0
+	setpos id_beam14,300,-500,0
+	setpos id_beam15,400,500,0
+	setpos id_beam16,500,-500,0
+	setpos id_beam17,600,500,0
+	setpos id_beam18,700,-500,0
+	setpos id_beam19,800,500,0
+	setpos id_beam20,900,-500,0
+	setpos id_beam21,1000,500,0
+
+	setpos id_beam22,-900,-500,0
+	setpos id_beam23,-800,500,0
+	setpos id_beam24,-700,-500,0
+	setpos id_beam25,-600,500,0
+	setpos id_beam26,-500,-500,0
+	setpos id_beam27,-400,500,0
+	setpos id_beam28,-300,-500,0
+	setpos id_beam29,-200,500,0
+	setpos id_beam30,-100,-500,0
+	setpos id_beam31,0,500,0
+	setpos id_beam32,100,-500,0
+	setpos id_beam33,200,500,0
+	setpos id_beam34,300,-500,0
+	setpos id_beam35,400,500,0
+	setpos id_beam36,500,-500,0
+	setpos id_beam37,600,500,0
+	setpos id_beam38,700,-500,0
+	setpos id_beam39,800,500,0
+	setpos id_beam40,900,-500,0
+	setpos id_beam41,1000,500,0
+
+	
+	setpos id_beam42,-900,-500,0
+	setpos id_beam43,-800,500,0
+	setpos id_beam44,-700,-500,0
+	setpos id_beam45,-600,500,0
+	setpos id_beam46,-500,-500,0
+	setpos id_beam47,-400,500,0
+	setpos id_beam48,-300,-500,0
+	setpos id_beam49,-200,500,0
+	setpos id_beam50,-100,-500,0
+	setpos id_beam51,0,500,0
+	setpos id_beam52,100,-500,0
+	setpos id_beam53,200,500,0
+	setpos id_beam54,300,-500,0
+	setpos id_beam55,400,500,0
+	setpos id_beam56,500,-500,0
+	setpos id_beam57,600,500,0
+	setpos id_beam58,700,-500,0
+	setpos id_beam59,800,500,0
+	setpos id_beam60,900,-500,0
+	setpos id_beam61,1000,500,0
+	
+	
+	setcls CLSMODE_SOLID, $8ce3fb//$404040		; 背景色
+	
+	model_x = 0 : model_y = 30 : model_z = 0
+	angr_x = 0  : angr_y = 64  : angr_z = -50
+	cam_x = 0   : cam_y = 40   : cam_z = 60
+	x=0         : y=60         : z=0
+	model_rx=0  : model_ry=0   : Energy = 1000
+	loop_x = 0  : loop_y = 0   : loop_z = 0
+	flg = 0     : objjudge = -1 : objjudge2 = -1
+	
+	objx = 0    : objy = 30    : objz = -80
+
+	flg1 = -1   : flg2 = -1    : flg3 = -1
+	flg4 = -1   : flg5 = -1    : flgxx = 0
+
+	//　ビーム移動方向
+	pmlistx = 1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1
+	pmlisty = 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+	
+	setcoli id_box,   2, 1
+	setcoli id_model, 1,0
+
+repeat
+	
+	// screen 0,1280,720
+	redraw 0			; 描画開始
+
+	gpdraw				; シーンの描画
+
+	color 255,255,255
+	pos 8,8:mes "Dangerous flying in the cube zone with jelly Lv.4"
+	mes "ワールド右限まで:   約 "+str((1000-model_x)/10)+"M"
+	mes "ワールド左限まで:   約 "+str((1000+model_x)/10)+"M"
+	mes "ワールド上限まで:   約 "+str((500-model_y)/10)+"M"
+	mes "ワールド下限まで:   約 "+str((500+model_y)/10)+"M"
+	mes "スタートからの距離: 約 "+str((-1*model_z)/10)+"M"
+	mes "ハイパワーメーター: 約 "+str(Energy-96)
+	// mes Lposx(21)
+	// mes Lposy(21)
+	
+	if str((1000-model_x)/10) = 0 :goto *fail_world
+	if str((1000+model_x)/10) = 0 :goto *fail_world
+	if str((500-model_y)/10) = 0 :goto *fail_world
+	if str((500+model_y)/10) = 0 :goto *fail_world
+	if model_z/10 <= -4500: goto *success
+
+	redraw 1			; 描画終了
+	await 1000/60			; 待ち時間
+
+	if angr_x != 0{
+		if angr_x <= -1:angr_x+=1
+		if angr_x >= 1:angr_x-=1
+	}
+	if angr_y != 64{
+		if angr_y >= 65:angr_y-=1
+		if angr_y <= 63:angr_y+=1
+	}
+
+	//left
+	key = 0
+	getkey key1, 37 
+	if key1 = 1 and cam_z-model_z<1{
+		if cam_x>model_x{
+			cam_x=cam_x+key1
+			cam_z=cam_z+key1
+			flg = 11
+		}
+		else{
+			cam_x=cam_x+key1
+			cam_z=cam_z-key1
+			flg = 22
+		}
+		
+	}
+	if key1 = 1 and cam_z-model_z>0{
+		if cam_x>model_x{
+			cam_x=cam_x-key1
+			cam_z=cam_z+key1
+			flg = 33
+		}
+		else{
+			cam_x=cam_x-key1
+			cam_z=cam_z-key1
+			flg = 44
+		}
+	}
+	if cam_z-model_z>61:cam_z=model_z+60
+
+	//right
+	key3 = 0
+	getkey key3, 39 
+	if key3 = 1 and cam_z-model_z<1{
+		if cam_x>model_x{
+			cam_x=cam_x-key3
+			cam_z=cam_z-key3
+			flg = 11
+		}
+		else{
+			cam_x=cam_x-key3
+			cam_z=cam_z+key3
+			flg = 22
+		}
+	}
+	if key3 = 1 and cam_z-model_z>0{
+		if cam_x>model_x{
+			cam_x=cam_x+key3
+			cam_z=cam_z-key3
+			flg = 33
+		}
+		else{
+			cam_x=cam_x+key3
+			cam_z=cam_z+key3
+			flg = 44
+		}
+	}
+	
+	
+	//up
+	getkey key2, 38
+	if key2 = 1 : model_y += 1 :cam_y+=1:point+=1
+	key2 = 0
+
+	
+	//down
+	getkey key4, 40 
+	if key4 = 1 : model_y -= 1 :cam_y-=1:point+=1
+	key4 = 0
+	//enter
+	getkey key5, 13
+	if key5 = 1 {
+		cam_x=model_x
+		cam_y=model_y
+		cam_z=model_z+60
+		model_rx=-0
+	}
+	key5 = 0
+	//w
+	getkey key6, 87
+	if key6 = 1 : model_x=model_x		//model_z -= 1 :cam_z -=1
+	key6 = 0
+	
+	//a
+	key8 = 0
+	getkey key8, 65
+	if key8 = 1{
+		cam_x -=1
+		model_x-=1
+		model_rx-=1
+		angr_y+=2
+	}
+	key9 = 0
+	//d
+	getkey key9, 68 
+	if key9 = 1 {
+		cam_x +=1
+		model_x+=1 
+		model_rx+=1 
+		angr_y-=2
+	}
+	if angr_y >= 73 : angr_y=72
+	if angr_y <= 55 : angr_y=56
+	//s
+	getkey key7, 83 
+		if key7 = 1 {
+			model_z += 1 
+			cam_z +=1
+			angr_x+=2
+		}
+	key7 = 0
+	
+	//space 
+	getkey key10, 32
+	Accel = 0
+	If Energy <= 5000 : Energy +=2
+	if key10 = 1 {
+		Accel = 1
+		angr_x-=2
+	}
+	if angr_x >= 9 : angr_x=8
+	if angr_x <= -5 : angr_x=-4
+	key10 = 0
+	getkey esc, 27
+		if esc = 1 :goto *start:stop
+	esc = 0
+	
+	//Autoスクロール
+	if Accel = 1{
+		if Energy > 100{
+			model_z -= 7
+			cam_z -=7
+			Energy-=7
+		}
+	}
+	if Accel = 0{
+		model_z -= 5 
+		cam_z -=5
+	}
+	
+	if Energy <= 0:Energy = 0
+	if Energy<=5000 :Energy+=1
+	if Energy = 3097:Energy=3096
+
+// モデル可動範囲制限
+	if model_y>501 :model_y = 500
+	if model_y<-501 :model_y = -500
+	if model_x>1001 :model_x = 1000 
+	if model_x<-1001 :model_x = -1000 
+	if cam_y>501 :cam_y = 500
+	if cam_y<-501 :cam_y = -500
+	
+	if model_y+60 <cam_y:cam_y = model_y+60
+	if model_y-60 >cam_y:cam_y = model_y-60
+
+	gplookat GPOBJ_CAMERA0,model_x,model_y,model_z
+	setpos GPOBJ_CAMERA0,cam_x,model_y+10,cam_z	
+	setpos id_model,model_x,model_y,model_z
+	setangr id_model,angr_x,angr_y,angr_z
+	
+	if angr_y = 320:angr_y = 64
+	if angr_y = 63 :angr_y = 319 
+	
+
+	flg1 = -1 : flg2 = -1 :	flg3 = -1 :	flg4 = -1 :	flg5 = -1
+	
+	repeat 61
+	// if cnt!=21{
+		if Lposx(cnt) >= 1001{
+			pmlistx(cnt) = 0
+			Lposx(cnt) = Lposx(cnt)-3
+		}
+		if Lposx(cnt) <= -1001{
+			pmlistx(cnt) = 1
+			Lposx(cnt) = Lposx(cnt)+3
+		}
+
+		if pmlistx(cnt) = 1{
+			Lposx(cnt) = Lposx(cnt)+1
+		}else{
+			Lposx(cnt) = Lposx(cnt)-1
+		}
+
+		if Lposy(cnt) >= 501{
+			pmlisty(cnt) = 1
+		}
+		if Lposy(cnt) <= -501{
+			pmlisty(cnt) = 0 
+		}
+
+		if pmlisty(cnt) = 1{
+			Lposy(cnt) = Lposy(cnt)-1
+		}else{
+			Lposy(cnt) = Lposy(cnt)+1
+		}
+	// }
+	loop
+
+
+	setpos id_beam1,Lposx(0),Lposy(0),0
+	setpos id_beam2,Lposx(1),Lposy(1),0
+	setpos id_beam3,Lposx(2),Lposy(2),0
+	setpos id_beam4,Lposx(3),Lposy(3),0
+	setpos id_beam5,Lposx(4),Lposy(4),0
+	setpos id_beam6,Lposx(5),Lposy(5),0
+	setpos id_beam7,Lposx(6),Lposy(6),0
+	setpos id_beam8,Lposx(7),Lposy(7),0
+	setpos id_beam9,Lposx(8),Lposy(8),0
+	setpos id_beam10,Lposx(9),Lposy(9),0
+	setpos id_beam11,Lposx(10),Lposy(10),0
+	setpos id_beam12,Lposx(11),Lposy(11),0
+	setpos id_beam13,Lposx(12),Lposy(12),0
+	setpos id_beam14,Lposx(13),Lposy(13),0
+	setpos id_beam15,Lposx(14),Lposy(14),0
+	setpos id_beam16,Lposx(15),Lposy(15),0
+	setpos id_beam17,Lposx(16),Lposy(16),0
+	setpos id_beam18,Lposx(17),Lposy(17),0
+	setpos id_beam19,Lposx(18),Lposy(18),0
+	setpos id_beam20,Lposx(19),Lposy(19),0
+	setpos id_beam21,Lposx(20),Lposy(20),0
+	setpos id_beam22,Lposx(21),Lposy(21),0//jdblavukhdnvlawi;wven
+	setpos id_beam23,Lposx(22),Lposy(22),0
+	setpos id_beam24,Lposx(23),Lposy(23),0
+	setpos id_beam25,Lposx(24),Lposy(24),0
+	setpos id_beam26,Lposx(25),Lposy(25),0
+	setpos id_beam27,Lposx(26),Lposy(26),0
+	setpos id_beam28,Lposx(27),Lposy(27),0
+	setpos id_beam29,Lposx(28),Lposy(28),0
+	setpos id_beam30,Lposx(29),Lposy(29),0
+	setpos id_beam31,Lposx(30),Lposy(30),0
+	setpos id_beam32,Lposx(31),Lposy(31),0
+	setpos id_beam33,Lposx(32),Lposy(32),0
+	setpos id_beam34,Lposx(33),Lposy(33),0
+	setpos id_beam35,Lposx(34),Lposy(34),0
+	setpos id_beam36,Lposx(35),Lposy(35),0
+	setpos id_beam37,Lposx(36),Lposy(36),0
+	setpos id_beam38,Lposx(37),Lposy(37),0
+	setpos id_beam39,Lposx(38),Lposy(38),0
+	setpos id_beam40,Lposx(39),Lposy(19),0
+	setpos id_beam41,Lposx(40),Lposy(40),0
+	setpos id_beam42,Lposx(41),Lposy(41),0
+	setpos id_beam43,Lposx(42),Lposy(42),0
+	setpos id_beam44,Lposx(43),Lposy(43),0
+	setpos id_beam45,Lposx(44),Lposy(44),0
+	setpos id_beam46,Lposx(45),Lposy(45),0
+	setpos id_beam47,Lposx(46),Lposy(46),0
+	setpos id_beam48,Lposx(47),Lposy(47),0
+	setpos id_beam49,Lposx(48),Lposy(48),0
+	setpos id_beam40,Lposx(49),Lposy(49),0
+	setpos id_beam51,Lposx(50),Lposy(50),0
+	setpos id_beam52,Lposx(51),Lposy(51),0
+	setpos id_beam53,Lposx(52),Lposy(52),0
+	// setpos id_beam54,Lposx(53),Lposy(53),0
+	// setpos id_beam55,Lposx(54),Lposy(54),0
+	setpos id_beam56,Lposx(55),Lposy(55),0
+	setpos id_beam57,Lposx(56),Lposy(56),0
+	setpos id_beam58,Lposx(57),Lposy(57),0
+	setpos id_beam59,Lposx(58),Lposy(58),0
+	setpos id_beam60,Lposx(59),Lposy(59),0
+	setpos id_beam61,Lposx(60),Lposy(60),0
+
+
+
+	//id_model側接触エリア設定 ビームの用意数分ループする
+	repeat 61
+	// if cnt!=21{
+		if model_x-30<=Lposx(cnt){
+			if Lposx(cnt)<=model_x+30{
+				if model_y-10<=Lposy(cnt){
+					if Lposy(cnt)<=model_y{
+						
+						// setpos id_model,50,50,50
+						// setpos GPOBJ_CAMERA0,model_x,model_y,model_z
+						// stop//後で消す
+						mmload "res/bomb2.mp3",16,0
+						mmplay 16
+
+						redraw 0
+						redraw 1
+						
+						gpreset
+						await 10
+						goto *fail
+						stop
+					}
+				}
+			}
+		// }
+	}
+
+	loop
+
+
+loop
+stop

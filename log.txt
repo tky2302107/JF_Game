@@ -1,0 +1,4 @@
+Encoding file: C:/Work/•”Šˆ/HSP/parts/jerry_extends.fbx
+Call to FbxImporter::Initialize() failed.
+Error returned: Unexpected file type
+
