@@ -16,9 +16,11 @@
   2024/10/31 wed
 
 作成者
-  JellyFish41(HSPプログラミングコンテスト　アカウント名)
+  JellyFish41(HSPプログラミングコンテストのアカウント名)
 
-
+ファイルの文字化けについて
+hspファイルはshift-jisがデフォルトの文字コードとなっています。
+utf-8で開いている場合はshift-jisで開き直してください。
 
 画像・3D等について
 gitのファイル制限(100MB)を超えるためGoogleドライブに保存してあります。
@@ -57,4 +59,4 @@ https://drive.google.com/drive/folders/10luT9Qqu3k4itIizQ14dtjmcIHbK8Zcz?usp=sha
 
 ゲーム起動
 resファイルが正しく配置されていれば、
-play.exeより起動できます
+play.exeより起動できます。
